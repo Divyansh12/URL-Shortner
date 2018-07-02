@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>URL Shortner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+    <div class = "container">
+        <div class="head">        <h1>URL-<span class="italic">Shortner</span></h1>
+        </div>
+        <input type="text" id="url" placeholder="Enter URL">
+        <button id="short">Get Short URL</button>
+        <h3></h3>    
+    </div>
+    
+    <script>
+
+        function guidGenerator() {
+            var S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+            };
+            //return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+            return (S4() + S4());
+        }
+        
+        function submitData() {
+            var siteID = guidGenerator();
+            var url = document.getElementById('url').value;
+            document.querySelector('h3').innerHTML = '<span class="other">Your shortened url is:</span><span class="italic urls"> http://localhost:3000/' + siteID + "</span>";
+            var xhttp;
+
+            if (window.XMLHttpRequest) {
+                xhttp = new XMLHttpRequest();
+
+            } else {
+                xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xhttp.open("POST", "http://localhost:3000/insertSite", true);
+            xhttp.setRequestHeader("Content-Type", "application/json;chartset=UTF-8");
+
+            var data = JSON.stringify({url:url, siteID:siteID});
+            
+            xhttp.send(data);
+        }
+
+        document.querySelector('#short').addEventListener('click', function () {
+            submitData();
+        });
+    </script>
+
+</body>
+</html>
