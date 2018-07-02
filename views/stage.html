@@ -6,7 +6,7 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <script>
+    <script async>
         var date = new Date();
         var h = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds()+":"+date.getMilliseconds();
         var mon = date.getMonth()+1;
@@ -45,9 +45,85 @@
         xhttp.send(data);
         
     </script>
+    <style>
+        body {
+        padding: 20px;
+        height: 100%;
+        }
+
+        .loader {
+            display: block;
+        padding: 5px;
+        }
+
+        .BounceBall {
+        width: 20px;
+        float: left;
+        height: 20px;
+        margin: 50px 5px;
+        border-radius: 50%;
+        }
+
+        .b1 {
+        background: rgb(0,0,255);
+        animation: bounce 1600ms ease-in-out infinite, fade 1000ms ease-in-out infinite;
+        }
+
+        .b2 {
+        background: rgb(0, 200, 255);
+        animation: bounce 1600ms 200ms ease-in-out infinite, fade 1000ms 200ms ease-in-out infinite;
+        }
+
+        .b3 {
+        background: rgb(0,255,255);
+        animation: bounce 1600ms 400ms ease-in-out infinite, fade 1000ms 400ms ease-in-out infinite;
+        }
+
+        .b4 {
+        background: rgb(0, 170, 255);
+        animation: bounce 1600ms 600ms ease-in-out infinite, fade 1000ms 600ms ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+        0%, 50%, 100% {
+            transform: translateY(0px);
+        }
+        
+        25% {
+            transform: translateY(-50px);
+        }
+        }
+
+        @keyframes fade {
+        0%, 100% {
+            opacity: 0.1;
+        }
+        
+        50% {
+            opacity: 1;
+        }
+        }
+
+        .container {
+        position: relative;
+        width: 100%;
+        display: flex;
+        margin: 10px auto;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        }
+    </style>
 
 </head>
 <body>
-    <h1>loading...</h1>
+    <div class = "container">
+        <h1>Loading...</h1>
+        <div class = "loader">
+          <div class = "BounceBall b1"></div>
+          <div class = "BounceBall b2"></div>
+          <div class = "BounceBall b3"></div>
+          <div class = "BounceBall b4"></div>
+      </div>
 </body>
 </html>
