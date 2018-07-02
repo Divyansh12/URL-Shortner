@@ -6,6 +6,7 @@ var app = express();
 var useragent = require('useragent');
 var cors = require('cors');
 var cookieParser = require("cookie-parser");
+var myYrl = "";
 
 app.listen(3000);
 
@@ -87,8 +88,8 @@ app.post('/insertlog', function (req, res, next){
         if (err) console.log(err.sqlMessage);
         else console.log("Inserted into datalog!!");
     });
-      
-    res.send('abc');
+
+    res.send(myYrl[0].url); 
 });
 
 //========================================
@@ -101,12 +102,13 @@ app.get('/info', function (req, res) {
 app.get('/stage/:siteID', function (req, res) {
     
     var sID = req.params.siteID;
-
     var sql = "SELECT url FROM sites WHERE siteID = '" + sID + "'";
 
     con.query(sql, function(err, result) {
         if(err) throw err;
         else console.log('url found!');
+        var temp = JSON.stringify(result);
+        myYrl = JSON.parse(temp);
         console.log(result);
     });
 

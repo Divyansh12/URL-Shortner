@@ -34,12 +34,16 @@
         xhttp.open("POST", "http://localhost:3000/insertlog", true);
         
         xhttp.setRequestHeader("Content-Type", "application/json;chartset=UTF-8");
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                window.location.href = "http://" + this.responseText;
+            }
+        };
         
         var data = JSON.stringify({url:url, date: date, ress: res, ref: ref, time: time, S_id: id});
         
         xhttp.send(data);
         
-        window.location.href = "http://www.google.com";
     </script>
 
 </head>
